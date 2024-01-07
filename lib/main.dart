@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
 import 'screens/auth_ui/sign-in-screen.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: SignUpScreen(),
+      builder: EasyLoading.init(),
     );
   }
 }
