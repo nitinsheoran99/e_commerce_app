@@ -11,6 +11,10 @@ import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../controller/get-user-data-controller.dart';
+import '../admin_panel/admin-main-screen.dart';
+import 'forgot-password-screen.dart';
+
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
 
@@ -20,6 +24,8 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final SignInController signInController = Get.put(SignInController());
+  final GetUserDataController getUserDataController =
+  Get.put(GetUserDataController());
   TextEditingController userEmail = TextEditingController();
   TextEditingController userPassword = TextEditingController();
 
@@ -99,11 +105,16 @@ class _SignInScreenState extends State<SignInScreen> {
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   alignment: Alignment.centerRight,
-                  child: Text(
-                    'Forget Password?',
-                    style: TextStyle(
-                        color: AppConstant.appScendoryColors,
-                        fontWeight: FontWeight.bold),
+                  child: GestureDetector(
+                    onTap: (){
+                      Get.to(() => ForgetPasswordScreen());
+                    },
+                    child: Text(
+                      'Forget Password?',
+                      style: TextStyle(
+                          color: AppConstant.appScendoryColors,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -132,17 +143,29 @@ class _SignInScreenState extends State<SignInScreen> {
                         } else {
                           UserCredential? userCredential = await signInController
                               .signInMethod(email, password);
-
+                          var userData = await getUserDataController
+                              .getUserData(userCredential!.user!.uid);
                           if (userCredential != null) {
                             if (userCredential.user!.emailVerified) {
-                              Get.snackbar(
-                                "Success",
-                                "login Successfully!",
-                                snackPosition: SnackPosition.BOTTOM,
-                                backgroundColor: AppConstant.appScendoryColors,
-                                colorText: AppConstant.appTextColor,
-                              );
-                              Get.offAll(() => MainScreen());
+                              if (userData[0]['isAdmin'] == true) {
+                                Get.snackbar(
+                                  "Success Admin Login",
+                                  "login Successfully!",
+                                  snackPosition: SnackPosition.BOTTOM,
+                                  backgroundColor: AppConstant.appScendoryColors,
+                                  colorText: AppConstant.appTextColor,
+                                );
+                                Get.offAll(() => AdminMainScreen());
+                              } else {
+                                Get.offAll(() => MainScreen());
+                                Get.snackbar(
+                                  "Success User Login",
+                                  "login Successfully!",
+                                  snackPosition: SnackPosition.BOTTOM,
+                                  backgroundColor: AppConstant.appScendoryColors,
+                                  colorText: AppConstant.appTextColor,
+                                );
+                              }
                             } else {
                               Get.snackbar(
                                 "Error",
