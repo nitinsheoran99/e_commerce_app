@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commerce_app/screens/user_panel/single-category-product-screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
@@ -51,19 +52,22 @@ class CategoriesWidget extends StatelessWidget {
                 );
                 return Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: FillImageCard(
-                        borderRadius: 20.0,
-                        width: Get.width / 3.0,
-                        heightImage: Get.height / 10,
-                        imageProvider: CachedNetworkImageProvider(
-                          categoriesModel.categoryImg,
-                        ),
-                        title: Center(
-                          child: Text(
-                            categoriesModel.categoryName,
-                            style: const TextStyle(fontSize: 12.0),
+                    GestureDetector(
+                      onTap: ()=>Get.to(()=>SingleCategoryProductScreen(categoryId: categoriesModel.categoryId)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: FillImageCard(
+                          borderRadius: 20.0,
+                          width: Get.width / 3.0,
+                          heightImage: Get.height / 10,
+                          imageProvider: CachedNetworkImageProvider(
+                            categoriesModel.categoryImg,
+                          ),
+                          title: Center(
+                            child: Text(
+                              categoriesModel.categoryName,
+                              style: const TextStyle(fontSize: 12.0),
+                            ),
                           ),
                         ),
                       ),

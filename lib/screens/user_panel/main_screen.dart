@@ -1,12 +1,16 @@
 
+import 'package:e_commerce_app/screens/user_panel/alll-categories-screen.dart';
 import 'package:e_commerce_app/util/app-constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+import '../../widgets/all-product-widget.dart';
 import '../../widgets/banner-widget.dart';
 import '../../widgets/category-widget.dart';
 import '../../widgets/custom-drawer-widget.dart';
+import '../../widgets/flash-sale-widget.dart';
 import '../../widgets/heading-widget.dart';
+import 'all-flash-sale-product-screen.dart';
+import 'all-product-screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -40,16 +44,28 @@ class MainScreen extends StatelessWidget {
               HeadingWidget(
                 headingTitle: "Categories",
                 headingSubTitle: "According to your budget",
-                onTap: () {},
+                onTap: () => Get.to(()=>AllCategoriesScreen()),
                 buttonText: "See More >",
               ),
+              
               CategoriesWidget(),
+              
               HeadingWidget(
                 headingTitle: "Flash Sale",
                 headingSubTitle: "According to your budget",
-                onTap: () {},
+                onTap: () =>Get.to(()=>AllFlashSaleProductScreen()),
                 buttonText: "See More >",
               ),
+              
+              FlashSaleWidget(),
+              HeadingWidget(
+                headingTitle: "All Products",
+                headingSubTitle: "According to your budget",
+                onTap: () => Get.to(() => AllProductsScreen()),
+                buttonText: "See More >",
+              ),
+
+              AllProductsWidget(),
             ],
           ),
         ),
