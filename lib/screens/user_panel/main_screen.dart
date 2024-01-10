@@ -11,6 +11,7 @@ import '../../widgets/flash-sale-widget.dart';
 import '../../widgets/heading-widget.dart';
 import 'all-flash-sale-product-screen.dart';
 import 'all-product-screen.dart';
+import 'cart-screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -26,6 +27,17 @@ class MainScreen extends StatelessWidget {
           style: TextStyle(color: AppConstant.appTextColor),
         ),
         centerTitle: true,
+        actions: [
+          GestureDetector(
+            onTap: () => Get.to(() => CartScreen()),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.shopping_cart,
+              ),
+            ),
+          ),
+        ],
 
       ),
       drawer: DrawerWidget(),

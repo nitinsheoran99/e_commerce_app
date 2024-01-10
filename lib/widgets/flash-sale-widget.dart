@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
 
 import '../models/product-model.dart';
+import '../screens/user_panel/product-details-screen.dart';
 import '../util/app-constant.dart';
 
 
@@ -76,8 +77,8 @@ class FlashSaleWidget extends StatelessWidget {
                 return Row(
                   children: [
                     GestureDetector(
-                      // onTap: () => Get.to(() =>
-                      //     ProductDetailsScreen(productModel: productModel)),
+                      onTap: () => Get.to(() =>
+                          ProductDetailsScreen(productModel: productModel)),
                       child: Padding(
                         padding: EdgeInsets.all(5.0),
                         child: Container(

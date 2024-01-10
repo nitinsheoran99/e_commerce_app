@@ -1,4 +1,4 @@
-class CartModel {
+class OrderModel {
   final String productId;
   final String categoryId;
   final String productName;
@@ -13,8 +13,14 @@ class CartModel {
   final dynamic updatedAt;
   final int productQuantity;
   final double productTotalPrice;
+  final String customerId;
+  final bool status;
+  final String customerName;
+  final String customerPhone;
+  final String customerAddress;
+  final String customerDeviceToken;
 
-  CartModel({
+  OrderModel({
     required this.productId,
     required this.categoryId,
     required this.productName,
@@ -29,6 +35,12 @@ class CartModel {
     required this.updatedAt,
     required this.productQuantity,
     required this.productTotalPrice,
+    required this.customerId,
+    required this.status,
+    required this.customerName,
+    required this.customerPhone,
+    required this.customerAddress,
+    required this.customerDeviceToken,
   });
 
   Map<String, dynamic> toMap() {
@@ -47,11 +59,17 @@ class CartModel {
       'updatedAt': updatedAt,
       'productQuantity': productQuantity,
       'productTotalPrice': productTotalPrice,
+      'customerId': customerId,
+      'status': status,
+      'customerName': customerName,
+      'customerPhone': customerPhone,
+      'customerAddress': customerAddress,
+      'customerDeviceToken': customerDeviceToken,
     };
   }
 
-  factory CartModel.fromMap(Map<String, dynamic> json) {
-    return CartModel(
+  factory OrderModel.fromMap(Map<String, dynamic> json) {
+    return OrderModel(
       productId: json['productId'],
       categoryId: json['categoryId'],
       productName: json['productName'],
@@ -66,6 +84,12 @@ class CartModel {
       updatedAt: json['updatedAt'],
       productQuantity: json['productQuantity'],
       productTotalPrice: json['productTotalPrice'],
+      customerId: json['customerId'],
+      status: json['status'],
+      customerName: json['customerName'],
+      customerPhone: json['customerPhone'],
+      customerAddress: json['customerAddress'],
+      customerDeviceToken: json['customerDeviceToken'],
     );
   }
 }

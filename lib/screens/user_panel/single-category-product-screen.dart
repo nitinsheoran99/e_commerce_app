@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/models/product-model.dart';
+import 'package:e_commerce_app/screens/user_panel/product-details-screen.dart';
 import 'package:e_commerce_app/util/app-constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -90,20 +91,24 @@ class _SingleCategoryProductScreenState
                 // );
                 return Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: FillImageCard(
-                        borderRadius: 20.0,
-                        width: Get.width / 2.3,
-                        heightImage: Get.height / 10,
-                        imageProvider: CachedNetworkImageProvider(
-                          productModel.productImages[0],
-                        ),
-                        title: Center(
-                          child: Text(
-                            productModel.productName,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(fontSize: 12.0),
+                    GestureDetector(
+                      onTap: () => Get.to(() =>
+                          ProductDetailsScreen(productModel: productModel)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: FillImageCard(
+                          borderRadius: 20.0,
+                          width: Get.width / 2.3,
+                          heightImage: Get.height / 10,
+                          imageProvider: CachedNetworkImageProvider(
+                            productModel.productImages[0],
+                          ),
+                          title: Center(
+                            child: Text(
+                              productModel.productName,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(fontSize: 12.0),
+                            ),
                           ),
                         ),
                       ),

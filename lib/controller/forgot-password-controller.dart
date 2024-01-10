@@ -18,14 +18,14 @@ class ForgerPasswordController extends GetxController {
 
       await _auth.sendPasswordResetEmail(email: userEmail);
       Get.snackbar(
-        "Request Sent Sucessfully",
+        "Request Sent Successfully",
         "Password reset link sent to $userEmail",
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: AppConstant.appScendoryColors,
         colorText: AppConstant.appTextColor,
       );
 
-      Get.offAll(() => SignInScreen());
+      Get.offAll(() => const SignInScreen());
 
       EasyLoading.dismiss();
     } on FirebaseAuthException catch (e) {

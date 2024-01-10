@@ -3,9 +3,9 @@ import 'package:e_commerce_app/controller/get-device-token-controller.dart';
 import 'package:e_commerce_app/models/user-model.dart';
 import 'package:e_commerce_app/screens/user_panel/main_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleSignInController extends GetxController{
@@ -48,12 +48,14 @@ class GoogleSignInController extends GetxController{
          await FirebaseFirestore.instance.collection('user').doc(user.uid).set(userModel.toMap());
 
          EasyLoading.dismiss();
-         Get.offAll(()=> MainScreen());
+         Get.offAll(()=> const MainScreen());
         }
       }
     } catch(e){
       EasyLoading.dismiss();
-      print("error $e");
+      if (kDebugMode) {
+        print("error $e");
+      }
     }
 
   }

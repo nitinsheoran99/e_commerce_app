@@ -1,5 +1,6 @@
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 import '../util/app-constant.dart';
@@ -19,7 +20,9 @@ class GetDeviceTokenController extends GetxController {
 
       if (token != null) {
         deviceToken = token;
-        print("token : $deviceToken");
+        if (kDebugMode) {
+          print("token : $deviceToken");
+        }
         update();
       }
     } catch (e) {

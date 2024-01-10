@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commerce_app/screens/user_panel/product-details-screen.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:image_card/image_card.dart';
 
-import '../../models/category-model.dart';
+
 import '../../models/product-model.dart';
 import '../../util/app-constant.dart';
 
@@ -85,7 +85,8 @@ class _AllFlashSaleProductScreenState extends State<AllFlashSaleProductScreen> {
                 return Row(
                   children: [
                     GestureDetector(
-                      // onTap: ()=>Get.to(()=>SingleCategoryProductScreen(categoryId: categoriesModel.categoryId)),
+                      onTap: () => Get.to(() =>
+                          ProductDetailsScreen(productModel: productModel)),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: FillImageCard(
