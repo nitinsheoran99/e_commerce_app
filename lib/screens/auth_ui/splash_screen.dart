@@ -1,17 +1,8 @@
 
-import 'dart:async';
 
 
-import 'package:e_commerce_app/screens/auth_ui/welcome_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
-
-import '../../controller/get-user-data-controller.dart';
-import '../../util/app-constant.dart';
+import '../../e_commerce.dart';
 import '../admin_panel/admin-main-screen.dart';
-import '../user_panel/main_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -37,9 +28,9 @@ class _SplashScreenState extends State<SplashScreen> {
       var userData = await getUserDataController.getUserData(user!.uid);
 
       if (userData[0]['isAdmin'] == true) {
-        Get.offAll(() => AdminMainScreen());
+        Get.offAll(() => const AdminMainScreen());
       } else {
-        Get.offAll(() => MainScreen());
+        Get.offAll(() => const MainScreen());
       }
     } else {
       Get.to(() => WelcomeScreen());

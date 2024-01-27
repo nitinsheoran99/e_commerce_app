@@ -1,16 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:e_commerce_app/e_commerce.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_swipe_action_cell/core/cell.dart';
 
-import 'package:get/get.dart';
-
-import '../../controller/cart-price-controller.dart';
-import '../../models/cart-model.dart';
-import '../../util/app-constant.dart';
 import 'checkout_screen.dart';
 
 class CartScreen extends StatefulWidget {
@@ -156,7 +148,7 @@ class _CartScreenState extends State<CartScreen> {
                                   });
                                 }
                               },
-                              child: CircleAvatar(
+                              child: const CircleAvatar(
                                 radius: 14.0,
                                 backgroundColor: AppConstant.appMainColor,
                                 child: Text('-'),
@@ -203,7 +195,7 @@ class _CartScreenState extends State<CartScreen> {
                                   });
                                 }
                               },
-                              child: CircleAvatar(
+                              child: const CircleAvatar(
                                 radius: 14.0,
                                 backgroundColor: AppConstant.appMainColor,
                                 child: Text('+'),
@@ -230,7 +222,7 @@ class _CartScreenState extends State<CartScreen> {
             Obx(
                   () => Text(
                 " Total ${productPriceController.totalPrice.value.toStringAsFixed(1)} : PKR",
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
             Padding(
@@ -249,7 +241,7 @@ class _CartScreenState extends State<CartScreen> {
                       style: TextStyle(color: AppConstant.appTextColor),
                     ),
                       onPressed: () {
-                        Get.to(() => CheckOutScreen());
+                        Get.to(() => const CheckOutScreen());
                       },
                   ),
                 ),

@@ -1,16 +1,9 @@
-import 'package:e_commerce_app/controller/sign-in-controller.dart';
-import 'package:e_commerce_app/screens/auth_ui/sign-up-screen.dart';
-import 'package:e_commerce_app/screens/user_panel/main_screen.dart';
-import 'package:e_commerce_app/util/app-constant.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 
-import '../../controller/get-user-data-controller.dart';
+
+import '../../e_commerce.dart';
 import '../admin_panel/admin-main-screen.dart';
 import 'forgot-password-screen.dart';
+
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});

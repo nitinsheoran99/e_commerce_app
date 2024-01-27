@@ -1,6 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
+
+
+import 'package:e_commerce_app/e_commerce.dart';
 
 class BannerController extends GetxController {
   RxList<String> bannerUrls = RxList<String>([]);

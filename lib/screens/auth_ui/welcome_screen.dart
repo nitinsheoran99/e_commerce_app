@@ -1,9 +1,6 @@
-import 'package:e_commerce_app/controller/googel-sign-in-controller.dart';
-import 'package:e_commerce_app/screens/auth_ui/sign-in-screen.dart';
-import 'package:e_commerce_app/util/app-constant.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
+
+
+import '../../e_commerce.dart';
 
 class WelcomeScreen extends StatelessWidget {
    WelcomeScreen({super.key});
@@ -72,7 +69,7 @@ class WelcomeScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20)),
               child: TextButton.icon(
                 onPressed: () {
-                  Get.to(()=>SignInScreen());
+                  Get.to(()=>const SignInScreen());
                 },
                 label: const Text(
                   "Sign in with email",

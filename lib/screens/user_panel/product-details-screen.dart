@@ -1,14 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import '../../models/cart-model.dart';
 import '../../models/product-model.dart';
 import '../../util/app-constant.dart';
@@ -28,17 +26,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: AppConstant.appTextColor),
+        iconTheme: const IconThemeData(color: AppConstant.appTextColor),
         backgroundColor: AppConstant.appMainColor,
-        title: Text(
+        title: const Text(
           "Product Details",
           style: TextStyle(color: AppConstant.appTextColor),
         ),
         actions: [
           GestureDetector(
-            onTap: () => Get.to(() => CartScreen()),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
+            onTap: () => Get.to(() => const CartScreen()),
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Icon(
                 Icons.shopping_cart,
               ),
@@ -46,166 +44,178 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ),
         ],
       ),
-      body: Container(
-        child: Column(
-          children: [
-            //product images
+      body: Column(
+        children: [
+          //product images
 
-            SizedBox(
-              height: Get.height / 60,
-            ),
-            CarouselSlider(
-              items: widget.productModel.productImages
-                  .map(
-                    (imageUrls) => ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  child: CachedNetworkImage(
-                    imageUrl: imageUrls,
-                    fit: BoxFit.cover,
-                    width: Get.width - 10,
-                    placeholder: (context, url) => ColoredBox(
-                      color: Colors.white,
-                      child: Center(
-                        child: CupertinoActivityIndicator(),
-                      ),
+          SizedBox(
+            height: Get.height / 60,
+          ),
+          CarouselSlider(
+            items: widget.productModel.productImages
+                .map(
+                  (imageUrls) => ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: CachedNetworkImage(
+                  imageUrl: imageUrls,
+                  fit: BoxFit.cover,
+                  width: Get.width - 10,
+                  placeholder: (context, url) => const ColoredBox(
+                    color: Colors.white,
+                    child: Center(
+                      child: CupertinoActivityIndicator(),
                     ),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
-                ),
-              )
-                  .toList(),
-              options: CarouselOptions(
-                scrollDirection: Axis.horizontal,
-                autoPlay: true,
-                aspectRatio: 2.5,
-                viewportFraction: 1,
-              ),
-            ),
-
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Card(
-                elevation: 5.0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        alignment: Alignment.topLeft,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              widget.productModel.productName,
-                            ),
-                            Icon(Icons.favorite_outline)
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        alignment: Alignment.topLeft,
-                        child: Row(
-                          children: [
-                            widget.productModel.isSale == true &&
-                                widget.productModel.salePrice != ''
-                                ? Text(
-                              "PKR: " + widget.productModel.salePrice,
-                            )
-                                : Text(
-                              "PKR: " + widget.productModel.fullPrice,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          "Category: " + widget.productModel.categoryName,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          widget.productModel.productDescription,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Material(
-                            child: Container(
-                              width: Get.width / 3.0,
-                              height: Get.height / 16,
-                              decoration: BoxDecoration(
-                                color: AppConstant.appScendoryColors,
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              child: TextButton(
-                                child: Text(
-                                  "WhatsApp",
-                                  style: TextStyle(
-                                      color: AppConstant.appTextColor),
-                                ),
-                                onPressed: () {
-                                  // Get.to(() => SignInScreen());
-                                },
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                          Material(
-                            child: Container(
-                              width: Get.width / 3.0,
-                              height: Get.height / 16,
-                              decoration: BoxDecoration(
-                                color: AppConstant.appScendoryColors,
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              child: TextButton(
-                                child: Text(
-                                  "Add to cart",
-                                  style: TextStyle(
-                                      color: AppConstant.appTextColor),
-                                ),
-                                onPressed: () async {
-                                  // Get.to(() => SignInScreen());
-
-                                  await checkProductExistence(uId: user!.uid);
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
             )
-          ],
-        ),
+                .toList(),
+            options: CarouselOptions(
+              scrollDirection: Axis.horizontal,
+              autoPlay: true,
+              aspectRatio: 2.5,
+              viewportFraction: 1,
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              elevation: 5.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      alignment: Alignment.topLeft,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            widget.productModel.productName,
+                          ),
+                          const Icon(Icons.favorite_outline)
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      alignment: Alignment.topLeft,
+                      child: Row(
+                        children: [
+                          widget.productModel.isSale == true &&
+                              widget.productModel.salePrice != ''
+                              ? Text(
+                            "PKR: ${widget.productModel.salePrice}",
+                          )
+                              : Text(
+                            "PKR: ${widget.productModel.fullPrice}",
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        "Category: ${widget.productModel.categoryName}",
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        widget.productModel.productDescription,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Material(
+                          child: Container(
+                            width: Get.width / 3.0,
+                            height: Get.height / 16,
+                            decoration: BoxDecoration(
+                              color: AppConstant.appScendoryColors,
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                            child: TextButton(
+                              child: const Text(
+                                "WhatsApp",
+                                style: TextStyle(
+                                    color: AppConstant.appTextColor),
+                              ),
+                              onPressed: () {
+                                sendMessageOnWhatsapp(
+                                  productModel: widget.productModel,
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 5.0,
+                        ),
+                        Material(
+                          child: Container(
+                            width: Get.width / 3.0,
+                            height: Get.height / 16,
+                            decoration: BoxDecoration(
+                              color: AppConstant.appScendoryColors,
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                            child: TextButton(
+                              child: const Text(
+                                "Add to cart",
+                                style: TextStyle(
+                                    color: AppConstant.appTextColor),
+                              ),
+                              onPressed: () async {
+                                // Get.to(() => SignInScreen());
+
+                                await checkProductExistence(uId: user!.uid);
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
+  static Future<void> sendMessageOnWhatsapp({required ProductModel productModel})async{
+    const number= '9350404570';
+    final message='Hello welcome in E-Commerce app \n i want to know about this product\n '
+        '${productModel.productName}\n ${productModel.salePrice}';
+    final url='https://wa.me/$number?text=${Uri.encodeComponent(message)}';
+    if(await canLaunch(url)){
+      await launch(url);
+    }
+    else{
+      throw 'Could not launch $url';
+    }
+  }
 
-  //checkl prooduct exist or not
+  //check prooduct exist or not
 
   Future<void> checkProductExistence({
     required String uId,
@@ -232,7 +242,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         'productTotalPrice': totalPrice
       });
 
-      print("product exists");
+      if (kDebugMode) {
+        print("product exists");
+      }
     } else {
       await FirebaseFirestore.instance.collection('cart').doc(uId).set(
         {

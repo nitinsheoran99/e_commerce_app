@@ -1,6 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get/get.dart';
+
+
+import '../e_commerce.dart';
 
 class ProductPriceController extends GetxController {
   RxDouble totalPrice = 0.0.obs;

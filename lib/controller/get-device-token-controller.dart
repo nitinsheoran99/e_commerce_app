@@ -1,9 +1,7 @@
 
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
 
-import '../util/app-constant.dart';
+
+import '../e_commerce.dart';
 
 class GetDeviceTokenController extends GetxController {
   String? deviceToken;

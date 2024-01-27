@@ -1,14 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:e_commerce_app/e_commerce.dart';
 
-import '../models/order-model.dart';
-import '../screens/user_panel/main_screen.dart';
-import '../util/app-constant.dart';
 import 'generate-order-id-service.dart';
 
 void placeOrder({
@@ -19,7 +10,7 @@ void placeOrder({
   required String customerDeviceToken,
 }) async {
   final user = FirebaseAuth.instance.currentUser;
-  EasyLoading.show(status: "Please Wait..");
+  EasyLoading.show(status: "Please Wait....");
   if (user != null) {
     try {
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
@@ -90,24 +81,30 @@ void placeOrder({
               .doc(cartModel.productId.toString())
               .delete()
               .then((value) {
-            print('Delete cart Products $cartModel.productId.toString()');
+            if (kDebugMode) {
+              print('Delete cart Products $cartModel.productId.toString()');
+            }
           });
         }
       }
 
-      print("Order Confirmed");
+      if (kDebugMode) {
+        print("Order Confirmed");
+      }
       Get.snackbar(
         "Order Confirmed",
         "Thank you for your order!",
         backgroundColor: AppConstant.appMainColor,
         colorText: Colors.white,
-        duration: Duration(seconds: 5),
+        duration: const Duration(seconds: 5),
       );
 
       EasyLoading.dismiss();
-      Get.offAll(() => MainScreen());
+      Get.offAll(() => const MainScreen());
     } catch (e) {
-      print("error $e");
+      if (kDebugMode) {
+        print("error $e");
+      }
     }
   }
 }

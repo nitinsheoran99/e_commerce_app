@@ -6,10 +6,9 @@ import 'package:e_commerce_app/util/app-constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:image_card/image_card.dart';
 
-import '../../models/category-model.dart';
+
 
 class SingleCategoryProductScreen extends StatefulWidget {
   String categoryId;

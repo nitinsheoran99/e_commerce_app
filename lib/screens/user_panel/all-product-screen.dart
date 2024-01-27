@@ -1,15 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_commerce_app/screens/user_panel/product-details-screen.dart';
+
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:image_card/image_card.dart';
 
-
-import '../../models/product-model.dart';
-import '../../util/app-constant.dart';
+import '../../e_commerce.dart';
 
 class AllProductsScreen extends StatefulWidget {
   const AllProductsScreen({super.key});
@@ -24,7 +17,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppConstant.appMainColor,
-        title: const Text('All Flash Sale Products'),
+        title: const Text('All Products'),
       ),
       body: FutureBuilder(
         future: FirebaseFirestore.instance.collection('products').where('isSale', isEqualTo: false).get(),

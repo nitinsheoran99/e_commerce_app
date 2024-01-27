@@ -1,13 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_commerce_app/screens/user_panel/single-category-product-screen.dart';
-import 'package:e_commerce_app/util/app-constant.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:image_card/image_card.dart';
 
-import '../../models/category-model.dart';
+
+import 'package:e_commerce_app/e_commerce.dart';
+import 'package:flutter/cupertino.dart';
+
 
 class AllCategoriesScreen extends StatefulWidget {
   const AllCategoriesScreen({super.key});

@@ -1,12 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_commerce_app/controller/get-device-token-controller.dart';
-import 'package:e_commerce_app/models/user-model.dart';
-import 'package:e_commerce_app/screens/user_panel/main_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+
+
+import '../e_commerce.dart';
 
 class GoogleSignInController extends GetxController{
   final GoogleSignIn googleSignIn= GoogleSignIn();

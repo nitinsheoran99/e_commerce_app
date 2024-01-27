@@ -1,9 +1,12 @@
+import 'package:e_commerce_app/screens/user_panel/all-order-screen.dart';
+import 'package:e_commerce_app/screens/user_panel/all-product-screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../screens/auth_ui/welcome_screen.dart';
+import '../screens/user_panel/user-contact-screen.dart';
 import '../util/app-constant.dart';
 
 
@@ -77,7 +80,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 ),
               ),
             ),
-            const Padding(
+             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: ListTile(
                 titleAlignment: ListTileTitleAlignment.center,
@@ -93,9 +96,13 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   Icons.arrow_forward,
                   color: AppConstant.appTextColor,
                 ),
+                onTap: (){
+                  Get.back();
+                  Get.to(()=> AllProductsScreen());
+                },
               ),
             ),
-            const Padding(
+             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: ListTile(
                 titleAlignment: ListTileTitleAlignment.center,
@@ -107,13 +114,17 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   Icons.shopping_bag,
                   color: AppConstant.appTextColor,
                 ),
+                onTap: (){
+                  Get.back();
+                  Get.to(()=> AllOrdersScreen());
+                },
                 trailing: Icon(
                   Icons.arrow_forward,
                   color: AppConstant.appTextColor,
                 ),
               ),
             ),
-            const Padding(
+             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: ListTile(
                 titleAlignment: ListTileTitleAlignment.center,
@@ -129,6 +140,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   Icons.arrow_forward,
                   color: AppConstant.appTextColor,
                 ),
+                onTap: (){
+                  Get.back();
+                  Get.to(()=> UserContactScreen());
+                },
               ),
             ),
             Padding(

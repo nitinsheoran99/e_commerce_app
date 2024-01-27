@@ -1,12 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
-
-import '../../controller/forgot-password-controller.dart';
-import '../../util/app-constant.dart';
 
 
+
+
+import '../../e_commerce.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});

@@ -1,12 +1,6 @@
-import 'package:e_commerce_app/controller/sign-up-controller.dart';
-import 'package:e_commerce_app/util/app-constant.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:get/get.dart';
 
 
-import 'sign-in-screen.dart';
+import '../../e_commerce.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
